@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mmcoe-maroon: #850013;
+  --color-mmcoe-maroon-hover: #6a000f;
+  --color-mmcoe-navy: #022b76;
+  --color-mmcoe-navy-hover: #011b4a;
+}
+
+
+/* =============================================
+   GLOBAL MOBILE-FIRST BASE STYLES
+   ============================================= */
+
+/* Smooth scrolling & prevent horizontal overflow */
+html, body {
+    height: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent; /* Remove tap flash on mobile */
+    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f8fafc; /* subtle slate background for a premium feel */
+    color: #0f172a; /* Slate 900 for text */
+}
+
+/* Touch-friendly tap targets */
+button, a {
+    touch-action: manipulation;
+}
+
+/* Prevent text from overflowing on tiny screens */
+* {
+    word-break: break-word;
+}
+
+/* Mobile scrollbars */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 99px;
+}
+
+/* Custom scrollbar helper class */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 99px;
+}
+
+/* Ensure modals are full screen on mobile */
+@media (max-width: 640px) {
+    /* Make modals less wide on mobile */
+    .modal-mobile-full {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 1.5rem !important;
+    }
+}
+
+/* Utility for glass panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

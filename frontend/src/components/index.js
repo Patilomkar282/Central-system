@@ -1,0 +1,12 @@
+export { default as FloatingSocialBar } from './FloatingSocialBar';
+export { default as Navbar } from './Navbar';
+export { default as HeroSection } from './HeroSection';
+export { default as AboutSection } from './AboutSection';
+export { default as ModulesSection } from './ModulesSection';
+export { default as HowItWorksSection } from './HowItWorksSection';
+export { default as DashboardNoteSection } from './DashboardNoteSection';
+export { default as AIFeaturesSection } from './AIFeaturesSection';
+export { default as StatsSection } from './StatsSection';
+export { default as TestimonialsFAQSection } from './TestimonialsFAQSection';
+export { default as CTASection } from './CTASection';
+export { default as Footer } from './Footer';
