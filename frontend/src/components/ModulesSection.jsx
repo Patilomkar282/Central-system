@@ -35,18 +35,6 @@ export default function ModulesSection({ handleModuleClick }) {
         </svg>
       ),
       url: import.meta.env.VITE_GD_URL || 'http://localhost:5176'
-    },
-    {
-      id: 'jobs',
-      title: 'Job & Resume Matching',
-      shortDesc: 'Smart Career Mapping',
-      description: 'Upload your resume and let our intelligent algorithm match you with the perfect job opportunities tailored precisely to your skillset.',
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
-      url: import.meta.env.VITE_JOBS_URL || 'http://localhost:5177'
     }
   ];
 
@@ -66,11 +54,11 @@ export default function ModulesSection({ handleModuleClick }) {
             Your Complete <span className="text-mmcoe-maroon">Preparation Hub</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
-            Seamlessly navigate between networking, interview prep, and career matching. One platform, infinite opportunities.
+            Seamlessly navigate between networking, interview prep, and collaborative group discussions. One platform, infinite opportunities.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
           {modules.map((mod) => (
             <div 
               key={mod.id}
@@ -80,7 +68,7 @@ export default function ModulesSection({ handleModuleClick }) {
               {/* Dynamic Brand Top Border */}
               <div className="absolute top-0 left-0 w-full h-1.5 bg-mmcoe-maroon transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
               
-              <div className="flex flex-col sm:flex-row items-start gap-6 relative z-10">
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-start gap-6 relative z-10">
                 {/* Icon Container */}
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 bg-mmcoe-navy/5 text-mmcoe-navy group-hover:bg-mmcoe-maroon/10 group-hover:text-mmcoe-maroon transition-colors duration-300">
                   {mod.icon}
@@ -90,10 +78,10 @@ export default function ModulesSection({ handleModuleClick }) {
                 <div className="flex-1">
                   <div className="mb-4">
                     <p className="text-xs font-bold uppercase tracking-widest mb-1 text-slate-500 group-hover:text-mmcoe-maroon transition-colors duration-300">{mod.shortDesc}</p>
-                    <h3 className="text-2xl font-black text-mmcoe-navy group-hover:text-mmcoe-navy-hover transition-colors">{mod.title}</h3>
+                    <h3 className="text-xl xl:text-2xl font-black text-mmcoe-navy group-hover:text-mmcoe-navy-hover transition-colors">{mod.title}</h3>
                   </div>
                   
-                  <p className="text-slate-600 leading-relaxed font-medium mb-8 text-[15px]">
+                  <p className="text-slate-600 leading-relaxed font-medium mb-8 text-[14px] xl:text-[15px]">
                     {mod.description}
                   </p>
                   
