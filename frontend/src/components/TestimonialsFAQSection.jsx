@@ -6,12 +6,12 @@ export default function TestimonialsFAQSection() {
         <h2 className="text-3xl font-bold text-mmcoe-navy mb-8">Student Experiences</h2>
         <div className="space-y-6">
           <div className="bg-slate-50 p-6 border-l-4 border-mmcoe-maroon">
-            <p className="text-slate-700 italic mb-4 text-sm">"The strict technical environment of SmartPrep helped me acclimate to actual corporate interview stress. The precise feedback on my tone was invaluable."</p>
+            <p className="text-slate-700 italic mb-4 text-sm">"Practicing with the AI mock interviews really helped me get over my interview anxiety. The feedback it gave on my speaking style was surprisingly helpful for the real thing."</p>
             <h5 className="font-bold text-slate-900 text-sm">Siddharth K.</h5>
             <p className="text-xs text-slate-500">Computer Engineering</p>
           </div>
           <div className="bg-slate-50 p-6 border-l-4 border-mmcoe-navy">
-            <p className="text-slate-700 italic mb-4 text-sm">"Connecting with MMCOE alumni working at top MNCs gave me the exact roadmap I needed for my final year preparations."</p>
+            <p className="text-slate-700 italic mb-4 text-sm">"Talking to MMCOE seniors who are already working in the industry helped me figure out exactly what I needed to focus on to get placed."</p>
             <h5 className="font-bold text-slate-900 text-sm">Priya M.</h5>
             <p className="text-xs text-slate-500">Information Technology</p>
           </div>
@@ -23,9 +23,9 @@ export default function TestimonialsFAQSection() {
         <h2 className="text-3xl font-bold text-mmcoe-navy mb-8">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {[
-            { q: 'Who is eligible to use SmartPrep?', a: 'SmartPrep is exclusively available for current students and verified alumni of MMCOE. Registration requires administrative validation.' },
-            { q: 'How does the Central Hub handle security?', a: 'The Hub utilizes JSON Web Tokens (JWT) and an OTP-based authentication model, ensuring enterprise-grade data protection within the college ecosystem.' },
-            { q: 'Can I access the modules directly?', a: 'No. All modules require authentication through this Central Hub to guarantee security and proper data synchronization.' }
+            { q: 'Who can use SmartPrep?', a: 'It\'s exclusively for MMCOE students and alumni right now. Your account will need to be verified by the college before you can log in.' },
+            { q: 'Is my data safe here?', a: 'Absolutely. We use secure login methods and OTPs (One Time Passwords) so your personal info and interview data stay private.' },
+            { q: 'Do I have to log in here to use the other tools?', a: 'Yes, the Central Hub is the main starting point. You log in here once, and it securely logs you into all the other modules like the Alumni network and AI interviews.' }
           ].map((faq, i) => (
             <div key={i} className="border border-slate-200 rounded bg-white p-5">
               <h4 className="text-sm font-bold text-slate-800 mb-2">{faq.q}</h4>
