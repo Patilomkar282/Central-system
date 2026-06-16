@@ -21,7 +21,7 @@ export default function HeroSection() {
         playsInline 
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
       >
-        <source src="/introvideo.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/drivadys9/video/upload/v1781633482/mmcoe_i0icff.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/20 z-0"></div>
       
