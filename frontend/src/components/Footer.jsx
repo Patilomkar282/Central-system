@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-slate-800 pb-8">
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center gap-3 mb-4">
-            <img src="/logo_college.webp" alt="MMCOE Logo" className="w-12 h-12 object-contain bg-white rounded p-1" />
+            <img src="/mmcoelogoimage.png" alt="MMCOE Logo" className="w-12 h-12 object-contain bg-white rounded p-1" />
             <div>
               <span className="text-lg font-bold text-white block">SmartPrep</span>
               <span className="text-xs uppercase tracking-widest text-slate-500">Central Hub</span>

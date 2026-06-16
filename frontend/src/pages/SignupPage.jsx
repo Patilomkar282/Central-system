@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL.replace(/\/+$/, '')}/api/auth` : 'http://localhost:5000/api/auth';
@@ -16,6 +16,12 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Clear any existing session when landing on the signup page
+    localStorage.removeItem('smartprep_token');
+    localStorage.removeItem('smartprep_user');
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,6 +67,7 @@ export default function SignupPage() {
       
       if (data.success) {
         localStorage.setItem('smartprep_token', data.token);
+        localStorage.setItem('smartprep_user', JSON.stringify(data.user));
         navigate('/'); // Redirect to landing page on success
       } else {
         setAuthError(data.message || 'Invalid or Expired OTP');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL.replace(/\/+$/, '')}/api/auth` : 'http://localhost:5000/api/auth';
@@ -10,6 +10,14 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Clear any existing session when landing on the login page
+    // This ensures that if a user is redirected here after logging out
+    // from a submodule, they are also completely logged out of the Central Hub.
+    localStorage.removeItem('smartprep_token');
+    localStorage.removeItem('smartprep_user');
+  }, []);
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
@@ -52,6 +60,7 @@ export default function LoginPage() {
       
       if (data.success) {
         localStorage.setItem('smartprep_token', data.token);
+        localStorage.setItem('smartprep_user', JSON.stringify(data.user));
         navigate('/'); // Redirect to landing page on success
       } else {
         setAuthError(data.message || 'Invalid Admin Credentials');
@@ -78,6 +87,7 @@ export default function LoginPage() {
       
       if (data.success) {
         localStorage.setItem('smartprep_token', data.token);
+        localStorage.setItem('smartprep_user', JSON.stringify(data.user));
         navigate('/'); // Redirect to landing page on success
       } else {
         setAuthError(data.message || 'Invalid or Expired OTP');

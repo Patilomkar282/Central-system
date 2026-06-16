@@ -1,4 +1,19 @@
-export default function Navbar({ isLoggedIn, setIsLoggedIn, setIsLoginModalOpen }) {
+import { useState, useRef, useEffect } from 'react';
+
+export default function Navbar({ isLoggedIn, user, onLogout, setIsLoginModalOpen }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
     <nav className="w-full transition-all duration-300 pt-2">
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 flex items-center justify-between">
@@ -29,9 +44,41 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn, setIsLoginModalOpen 
             <span className="mx-3 text-white/40 font-light">|</span>
             
             {isLoggedIn ? (
-              <button onClick={() => setIsLoggedIn(false)} className="ml-2 px-5 py-1.5 bg-mmcoe-maroon hover:bg-mmcoe-maroon-hover text-white rounded-full font-bold transition uppercase tracking-wider text-[11px] shadow-md border border-red-900">
-                Logout
-              </button>
+              <div className="relative ml-2" ref={dropdownRef}>
+                <button 
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+                  className="px-4 py-1.5 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full font-semibold transition tracking-wide text-[12px] shadow-md border border-slate-600 flex items-center gap-2"
+                >
+                  <div className="w-5 h-5 rounded-full bg-mmcoe-maroon flex items-center justify-center text-xs font-bold text-white">
+                    {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                  </div>
+                  <span className="truncate max-w-[120px]">{user?.name || 'User'}</span>
+                  <svg className={`w-3 h-3 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="p-4 border-b border-slate-100 bg-slate-50 text-left">
+                      <p className="text-sm font-bold text-slate-800 truncate">{user?.name || 'User'}</p>
+                      <p className="text-xs text-slate-500 truncate mt-0.5">{user?.email || 'No email provided'}</p>
+                      {user?.role && (
+                        <span className="inline-block mt-2 px-2 py-0.5 bg-mmcoe-maroon/10 text-mmcoe-maroon text-[10px] font-bold uppercase rounded-full tracking-wider">
+                          {user.role}
+                        </span>
+                      )}
+                    </div>
+                    <div className="p-1">
+                      <button 
+                        onClick={() => { setIsDropdownOpen(false); onLogout(); }} 
+                        className="w-full text-left px-4 py-2.5 text-sm text-red-600 font-semibold hover:bg-red-50 rounded-md transition-colors flex items-center gap-2"
+                      >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             ) : (
               <button onClick={() => setIsLoginModalOpen(true)} className="ml-2 px-5 py-1.5 bg-mmcoe-maroon hover:bg-mmcoe-maroon-hover text-white rounded-full font-bold transition uppercase tracking-wider text-[11px] shadow-md border border-red-900">
                 Student Login

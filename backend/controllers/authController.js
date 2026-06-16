@@ -151,7 +151,7 @@ exports.verifyOtp = async (req, res) => {
         id: user._id,
         email: user.email,
         role: user.role,
-        profile: user.profile
+        name: user.name
       }
     });
 

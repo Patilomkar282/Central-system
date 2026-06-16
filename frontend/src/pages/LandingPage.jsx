@@ -17,12 +17,21 @@ import {
 
 export default function LandingPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('smartprep_token');
+    const userData = localStorage.getItem('smartprep_user');
     if (token) {
       setIsLoggedIn(true);
+      if (userData) {
+        try {
+          setUser(JSON.parse(userData));
+        } catch (e) {
+          console.error("Failed to parse user data", e);
+        }
+      }
     }
   }, []);
 
@@ -41,7 +50,9 @@ export default function LandingPage() {
 
   const handleLogout = () => {
     localStorage.removeItem('smartprep_token');
+    localStorage.removeItem('smartprep_user');
     setIsLoggedIn(false);
+    setUser(null);
   };
 
   return (
@@ -51,7 +62,8 @@ export default function LandingPage() {
       <header className="absolute top-0 w-full z-50 bg-gradient-to-b from-slate-900/95 via-slate-900/60 to-transparent pb-8 pt-2">
         <Navbar 
           isLoggedIn={isLoggedIn} 
-          setIsLoggedIn={setIsLoggedIn} 
+          user={user}
+          onLogout={handleLogout}
           setIsLoginModalOpen={handleLoginClick} 
         />
       </header>
