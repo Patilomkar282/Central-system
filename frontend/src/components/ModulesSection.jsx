@@ -10,7 +10,7 @@ export default function ModulesSection({ handleModuleClick }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
-      url: import.meta.env.VITE_ALUMNI_URL || 'http://localhost:5173'
+      url: import.meta.env.DEV ? 'http://localhost:5173' : 'https://alumini.smartprep.live'
     },
     {
       id: 'interviews',
@@ -22,7 +22,7 @@ export default function ModulesSection({ handleModuleClick }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
         </svg>
       ),
-      url: import.meta.env.VITE_INTERVIEW_URL || 'http://localhost:5175'
+      url: import.meta.env.DEV ? 'http://localhost:5175' : 'https://interview.smartprep.live'
     },
     {
       id: 'gd',
@@ -34,7 +34,7 @@ export default function ModulesSection({ handleModuleClick }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
         </svg>
       ),
-      url: import.meta.env.VITE_GD_URL || 'http://localhost:5176'
+      url: import.meta.env.DEV ? 'http://localhost:5176' : 'https://gd.smartprep.live'
     }
   ];
 
