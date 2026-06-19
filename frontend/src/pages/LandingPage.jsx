@@ -9,7 +9,6 @@ import {
   HowItWorksSection, 
   DashboardNoteSection, 
   AIFeaturesSection, 
-  StatsSection, 
   TestimonialsFAQSection, 
   CTASection, 
   Footer 
@@ -74,7 +73,6 @@ export default function LandingPage() {
       <HowItWorksSection />
       <DashboardNoteSection />
       <AIFeaturesSection />
-      <StatsSection />
       <TestimonialsFAQSection />
       <CTASection setIsLoginModalOpen={handleLoginClick} />
       
