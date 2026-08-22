@@ -99,6 +99,32 @@ export default function LoginPage() {
     }
   };
 
+  const handleGuestLogin = async () => {
+    setIsLoading(true);
+    setAuthError('');
+    
+    try {
+      const res = await fetch(`${API_URL}/guest-login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      
+      if (data.success) {
+        localStorage.setItem('smartprep_token', data.token);
+        localStorage.setItem('smartprep_user', JSON.stringify(data.user));
+        navigate('/'); // Redirect to landing page on success
+      } else {
+        setAuthError(data.message || 'Guest login failed');
+      }
+    } catch (err) {
+      setAuthError('Server connection error. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-slate-50 flex">
       {/* Left Branding Panel */}
@@ -250,12 +276,31 @@ export default function LoginPage() {
               {step === 1 ? (isLoading ? 'Processing...' : 'Continue with Email') : step === 2 ? (isLoading ? 'Verifying...' : 'Verify & Login') : (isLoading ? 'Authenticating...' : 'Login as Admin')}
             </button>
           </form>
+
+          {/* Guest / External User Login Option */}
+          <div className="mt-6 pt-6 border-t border-slate-200">
+            <button
+              type="button"
+              onClick={handleGuestLogin}
+              disabled={isLoading}
+              className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-400 text-white font-bold rounded shadow-md transition-all text-sm flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+              </svg>
+              One-Click Guest Login (External Access)
+            </button>
+            <p className="text-center text-xs text-slate-500 mt-2 font-medium">
+              Instant evaluation access to all 3 modules without email verification.
+            </p>
+          </div>
           
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
              <Link to="/" className="text-sm font-medium text-slate-400 hover:text-slate-600 transition-colors">
                &larr; Back to Home
              </Link>
           </div>
+
 
         </div>
       </div>

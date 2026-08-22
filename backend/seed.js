@@ -20,6 +20,22 @@ async function seedDatabase() {
         const usersCollection = db.collection('users');
         const users = [
             {
+                name: 'Guest User',
+                email: 'guest@smartprep.com',
+                password: 'password123',
+                role: 'student',
+                isVerified: true,
+                isProfileComplete: true,
+                department: 'Computer Engineering',
+                branch: 'Computer Engineering',
+                graduationYear: 2026,
+                currentYear: 4,
+                college: 'External',
+                interestAreas: ['General', 'Software Engineering'],
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
                 name: 'Admin',
                 email: 'admin@mmcoe.edu.in',
                 password: 'admin@123',

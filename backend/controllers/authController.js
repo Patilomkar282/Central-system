@@ -223,3 +223,45 @@ exports.getMe = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
+// Guest Login (1-click access for reviewers / external guests)
+exports.guestLogin = async (req, res) => {
+  try {
+    const guestEmail = 'guest@smartprep.com';
+    let guestUser = await User.findOne({ email: guestEmail });
+
+    if (!guestUser) {
+      guestUser = new User({
+        name: 'Guest User',
+        email: guestEmail,
+        role: 'student',
+        isVerified: true,
+        department: 'Computer Engineering',
+        graduationYear: 2026
+      });
+      await guestUser.save();
+    }
+
+    const token = jwt.sign(
+      { id: guestUser._id, email: guestUser.email, role: guestUser.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Guest login successful',
+      token,
+      user: {
+        id: guestUser._id,
+        email: guestUser.email,
+        role: guestUser.role,
+        name: guestUser.name
+      }
+    });
+  } catch (error) {
+    console.error('Guest Login Error:', error);
+    res.status(500).json({ success: false, message: 'Failed to process guest login' });
+  }
+};
+
