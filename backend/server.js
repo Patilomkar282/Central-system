@@ -41,9 +41,8 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 };
 
-// Apply CORS & Preflight handling
+// Apply CORS & Preflight handling (In Express 5, cors() middleware automatically intercepts all OPTIONS preflights)
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
 // Middleware
 app.use(express.json());
@@ -79,7 +78,7 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.VERCEL && process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
 
