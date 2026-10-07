@@ -137,10 +137,9 @@ exports.verifyOtp = async (req, res) => {
     await user.save();
 
     // Issue JWT Token
-    const jwtSecret = process.env.JWT_SECRET || 'supersecret_smartprep_jwt_token_key_2026';
     const token = jwt.sign(
       { id: user._id, email: user.email, role: user.role },
-      jwtSecret,
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -186,10 +185,9 @@ exports.adminLogin = async (req, res) => {
       }
 
       // Issue JWT Token
-      const jwtSecret = process.env.JWT_SECRET || 'supersecret_smartprep_jwt_token_key_2026';
       const token = jwt.sign(
         { id: adminUser._id, email: adminUser.email, role: 'admin' },
-        jwtSecret,
+        process.env.JWT_SECRET,
         { expiresIn: '7d' }
       );
 
@@ -244,10 +242,9 @@ exports.guestLogin = async (req, res) => {
       await guestUser.save();
     }
 
-    const jwtSecret = process.env.JWT_SECRET || 'supersecret_smartprep_jwt_token_key_2026';
     const token = jwt.sign(
       { id: guestUser._id, email: guestUser.email, role: guestUser.role },
-      jwtSecret,
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -267,5 +264,4 @@ exports.guestLogin = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to process guest login' });
   }
 };
-
 
