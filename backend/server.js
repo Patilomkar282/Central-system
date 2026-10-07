@@ -8,6 +8,11 @@ connectDB();
 
 const app = express();
 
+const envOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean);
+
 const allowedOrigins = [
   'https://www.smartprep.live',
   'https://smartprep.live',
@@ -17,7 +22,8 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   'http://localhost:5174',
-  'http://localhost:5175'
+  'http://localhost:5175',
+  ...envOrigins
 ];
 
 // Robust CORS Middleware for Preflight and Origin handling
